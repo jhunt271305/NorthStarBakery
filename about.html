@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>North Star Bakery | About</title>
+  <title>North Star Bakery | Contact</title>
 </head>
 <body>
   <header>
     <img src="media/bakery-logo.png" alt="North Star Bakery logo">
-    <h1>About North Star Bakery</h1>
+    <h1>Contact & Pre-Orders</h1>
     <nav>
       <ul>
         <li><a href="index.html">Home</a></li>
@@ -20,17 +20,47 @@
   </header>
 
   <main>
-    <img src="media/bakery-storefront.jpg" alt="North Star Bakery storefront">
-    <h2>Our Story</h2>
-    <p>Baking has been a lifelong dream for me. My mother and grandmothers were the driving force behind my passion. They taught me the science behind baking as well as these fundamental facts: life is sweet, love is enduring, and you are truly blessed when you can be part of another’s joy.</p>
-    <p>We are a small-batch, from-scratch storefront bakery using real butter, real sugar, and fresh eggs. We love taking the ordinary and making it extraordinary. It is never “just” a cupcake, a cookie, a macaron, or a loaf of bread. It’s a memory, and we’re honored to be a part of it.</p>
+    <h2>Behind the Scenes</h2>
+    <video src="media/bakery-behind-scenes.mp4" controls width="720" height="480" poster="media/bakery-signature-loaf.jpg" preload="metadata">
+      Your browser does not support the video tag. Please visit our bakery to see the baking process in person.
+    </video>
 
-    <h2>Sourcing Philosophy</h2>
-    <p>We source high-quality, local ingredients whenever possible to support our community and deliver the best flavor.</p>
+    <h2>Inquiry & Pre-Order Form</h2>
+    <form action="/contact" method="post">
+      <fieldset>
+        <legend>Contact Information</legend>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required minlength="2" maxlength="50"><br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+      </fieldset>
+
+      <fieldset>
+        <legend>Order Details</legend>
+        <label for="pickup">Pickup Date:</label>
+        <input type="date" id="pickup" name="pickup" required><br><br>
+
+        <label for="request">Request Type:</label>
+        <select id="request" name="request" required>
+          <option value="">Choose one</option>
+          <option value="preorder">Pre-order</option>
+          <option value="question">General Question</option>
+        </select><br><br>
+
+        <label for="details">Item Details:</label>
+        <textarea id="details" name="details" required minlength="10"></textarea><br><br>
+
+        <label for="allergy">Allergy Notes (optional):</label>
+        <textarea id="allergy" name="allergy"></textarea><br><br>
+      </fieldset>
+
+      <button type="submit">Submit Request</button>
+    </form>
   </main>
 
   <footer>
-    <p>123 Main Street, Atlanta, GA | (770) 555-1212 | info@northstarbakery.com</p>
+    <p>123 Main Street, Atlanta, GA | (770) 555-1212</p>
     <p>&copy; 2026 North Star Bakery</p>
   </footer>
 </body>
