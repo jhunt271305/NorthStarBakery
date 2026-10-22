@@ -13,17 +13,38 @@
         preload="metadata">
    </video>
   <body>
-    <form>
-      action="/contact"
-      method="post"
-      Set type="text"
-      Set name="full name"
-      Set type="email"
-      Set name="email_address"
-      Set type="text"
-      Set name="subject"
-    <button type="submit">Send Message</button>
+    <form action="/contact" method="post">
+      <fieldset>
+        <legend>Contact Information</legend>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required minlength="2" maxlength="50"><br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+      </fieldset>
+
+      <fieldset>
+        <legend>Order Details</legend>
+        <label for="pickup">Pickup Date:</label>
+        <input type="date" id="pickup" name="pickup" required><br><br>
+
+        <label for="request">Request Type:</label>
+        <select id="request" name="request" required>
+          <option value="">Choose one</option>
+          <option value="preorder">Pre-order</option>
+          <option value="question">General Question</option>
+        </select><br><br>
+
+        <label for="details">Item Details:</label>
+        <textarea id="details" name="details" required minlength="10"></textarea><br><br>
+
+        <label for="allergy">Allergy Notes (optional):</label>
+        <textarea id="allergy" name="allergy"></textarea><br><br>
+      </fieldset>
+
+      <button type="submit">Submit Request</button>
     </form>
+  </main>
     <h1>North Star Bakery</h1>
     <p>123 Main Street, Atlanta, GA, United State</p>
     <p>(770)555-1212</p>
