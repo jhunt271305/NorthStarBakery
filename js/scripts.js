@@ -5,22 +5,22 @@ const products = [
   { id: "cakes", name: "Cakes & Specialty Items", price: "Starting at $25" }
 ];
 
-// Load favorites from localStorage
+// ---------- Favorites ----------
 function loadFavorites() {
   const stored = localStorage.getItem("bakeryFavorites");
   return stored ? JSON.parse(stored) : [];
 }
 
-// Save favorites to localStorage
 function saveFavorites(favorites) {
   localStorage.setItem("bakeryFavorites", JSON.stringify(favorites));
 }
 
-// Update the favorites list on the page
 function displayFavorites() {
   const favorites = loadFavorites();
   const list = document.getElementById("favorites-list");
   const noFavMsg = document.getElementById("no-favorites");
+
+  if (!list || !noFavMsg) return; // Guard: only run on products page
 
   list.innerHTML = "";
 
@@ -41,7 +41,6 @@ function displayFavorites() {
   });
 }
 
-// Toggle favorite status
 function toggleFavorite(productId) {
   let favorites = loadFavorites();
 
@@ -56,7 +55,6 @@ function toggleFavorite(productId) {
   updateButtons();
 }
 
-// Update button text based on current favorites
 function updateButtons() {
   const favorites = loadFavorites();
   document.querySelectorAll(".fav-btn").forEach(btn => {
@@ -65,8 +63,9 @@ function updateButtons() {
   });
 }
 
-// Set up event listeners
 function initFavorites() {
+  if (!document.getElementById("favorites-list")) return; // Guard
+
   displayFavorites();
   updateButtons();
 
@@ -77,7 +76,7 @@ function initFavorites() {
   });
 }
 
-//Form validation
+// ---------- Form Validation ----------
 function validateForm(event) {
   event.preventDefault();
 
@@ -86,30 +85,25 @@ function validateForm(event) {
   const details = document.getElementById("details");
   let isValid = true;
 
-  // Clear old messages
   document.querySelectorAll(".error").forEach(el => el.remove());
 
-  // Required + min length for name
   if (name.value.trim().length < 2) {
     showError(name, "Name must be at least 2 characters.");
     isValid = false;
   }
 
-  // Email format
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailPattern.test(email.value.trim())) {
     showError(email, "Please enter a valid email address.");
     isValid = false;
   }
 
-  // Required + min length for details
   if (details.value.trim().length < 10) {
     showError(details, "Please provide at least 10 characters of item details.");
     isValid = false;
   }
 
   if (isValid) {
-    // Optional: save name to localStorage
     localStorage.setItem("bakeryUserName", name.value.trim());
     alert("Thank you! Your request has been received.");
     event.target.reset();
@@ -126,21 +120,19 @@ function showError(input, message) {
   input.parentNode.insertBefore(error, input.nextSibling);
 }
 
-// Attach to form
+// ---------- Single DOMContentLoaded ----------
 document.addEventListener("DOMContentLoaded", () => {
+  // Favorites (products page)
+  initFavorites();
+
+  // Form (contact page)
   const form = document.getElementById("contact-form");
   if (form) {
     form.addEventListener("submit", validateForm);
 
-    // Pre-fill name if saved
     const savedName = localStorage.getItem("bakeryUserName");
     if (savedName) {
       document.getElementById("name").value = savedName;
     }
   }
 });
-
-// Run when page loads
-document.addEventListener("DOMContentLoaded", initFavorites);
-
-
