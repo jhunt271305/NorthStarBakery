@@ -105,6 +105,7 @@ function validateForm(event) {
 
   if (isValid) {
     localStorage.setItem("bakeryUserName", name.value.trim());
+    localStorage.setItem("bakeryUserEmail", email.value.trim());
     alert("Thank you! Your request has been received.");
     event.target.reset();
   }
@@ -131,8 +132,12 @@ document.addEventListener("DOMContentLoaded", () => {
     form.addEventListener("submit", validateForm);
 
     const savedName = localStorage.getItem("bakeryUserName");
+    const savedEmail = localStorage.getItem("bakeryUserEmail");
     if (savedName) {
       document.getElementById("name").value = savedName;
+    }
+    if (savedEmail) {
+      document.getElementById("email").value = savedEmail;
     }
   }
 });
