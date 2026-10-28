@@ -20,7 +20,7 @@ function displayFavorites() {
   const list = document.getElementById("favorites-list");
   const noFavMsg = document.getElementById("no-favorites");
 
-  if (!list || !noFavMsg) return; // Guard: only run on products page
+  if (!list || !noFavMsg) return;
 
   list.innerHTML = "";
 
@@ -64,7 +64,7 @@ function updateButtons() {
 }
 
 function initFavorites() {
-  if (!document.getElementById("favorites-list")) return; // Guard for Products page
+  if (!document.getElementById("favorites-list")) return;
 
   displayFavorites();
   updateButtons();
@@ -77,67 +77,6 @@ function initFavorites() {
 }
 
 // ---------- Form Validation ----------
-function validateForm(event) {
-  event.preventDefault(); // REMOVE or comment out this line if you want the form to submit to a server
-
-  const name = document.getElementById("name");
-  const email = document.getElementById("email");
-  const details = document.getElementById("details");
-  let isValid = true;
-
-  document.querySelectorAll(".error").forEach(el => el.remove());
-
-  if (name.value.trim().length < 2) {
-    showError(name, "Name must be at least 2 characters.");
-    isValid = false;
-  }
-
-  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailPattern.test(email.value.trim())) {
-    showError(email, "Please enter a valid email address.");
-    isValid = false;
-  }
-
-  if (details.value.trim().length < 10) {
-    showError(details, "Please provide at least 10 characters of item details.");
-    isValid = false;
-  }
-
-  if (isValid) {
-    localStorage.setItem("bakeryUserName", name.value.trim());
-    alert("Thank you! Your request has been received.");
-
-    event.target.reset(); // REMOVE or comment out this line to submit
-  }
-}
-
-function showError(input, message) {
-  const error = document.createElement("span");
-  error.className = "error";
-  error.style.color = "#6B3E26";
-  error.style.fontSize = "0.9rem";
-  error.style.display = "block";
-  error.textContent = message;
-  input.parentNode.insertBefore(error, input.nextSibling);
-}
-
-// ---------- Single DOMContentLoaded ----------
-document.addEventListener("DOMContentLoaded", () => {
-  // Favorites (products page)
-  initFavorites();
-
-  // Form (contact page)
-  const form = document.getElementById("contact-form");
-  if (form) {
-    form.addEventListener("submit", validateForm);
-
-    const savedName = localStorage.getItem("bakeryUserName");
-    if (savedName) {
-      document.getElementById("name").value = savedName;
-    }
-  }
-});
-
 function validateForm(event) {
   event.preventDefault();
 
@@ -181,7 +120,7 @@ function showError(input, message) {
   input.parentNode.insertBefore(error, input.nextSibling);
 }
 
-// ---------- Individual DOMContentLoaded ----------
+// ---------- Single DOMContentLoaded ----------
 document.addEventListener("DOMContentLoaded", () => {
   // Favorites (products page)
   initFavorites();
